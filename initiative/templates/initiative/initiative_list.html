@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped">
+    <tr><th>Initiative</th><th>Personnage</th><th>Update</th><th>Delete</th></tr>
+    {% for object in object_list %}
+    <tr>
+        <td>{{ object.initiative }}</td>
+        <td>{{ object.slug }}</td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'initiative_update' object.slug %}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'initiative_delete' object.slug %}"><span class="glyphicon glyphicon-remove" ></span></a></td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="4"><a class="btn btn-default" href="{% url 'initiative_create' %}"><span class="glyphicon glyphicon-plus" ></span></a></td></tr>
+</table>
+{% endblock %}
