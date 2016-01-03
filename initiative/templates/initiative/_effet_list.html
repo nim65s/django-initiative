@@ -1,0 +1,15 @@
+<table class="table table-striped">
+    <tr><th>temps restant</th><th>Effet</th><th>Update</th><th>Delete</th></tr>
+    {% for effet in effet_list %}
+    <tr>
+        <td>{{ effet.temps_restant }}</td>
+        <td>{{ effet.slug }}</td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'effet_update' effet.slug %}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'effet_delete' effet.slug %}"><span class="glyphicon glyphicon-remove" ></span></a></td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="4">
+            <a class="btn btn-default" href="{% url 'effet_create' %}"><span class="glyphicon glyphicon-plus" ></span></a>
+            <a class="btn btn-default" href="{% url 'round' %}"><span class="glyphicon glyphicon-repeat" ></span></a>
+    </td></tr>
+</table>

@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr><th>Initiative</th><th>Personnage</th><th>Update</th><th>Delete</th></tr>
+    {% for initiative in initiative_list %}
+    <tr>
+        <td>{{ initiative.initiative }}</td>
+        <td>{{ initiative.slug }}</td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'initiative_update' initiative.slug %}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+        <td><a class="btn btn-default btn-xs" href="{% url 'initiative_delete' initiative.slug %}"><span class="glyphicon glyphicon-remove" ></span></a></td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="4"><a class="btn btn-default" href="{% url 'initiative_create' %}"><span class="glyphicon glyphicon-plus" ></span></a></td></tr>
+</table>
