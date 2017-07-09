@@ -1,7 +1,2 @@
-Django
+django
 django-bootstrap3
-flake8
-IPython
-isort
-pep8-naming
-pip-tools
