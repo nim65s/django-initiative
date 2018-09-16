@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from ndh.mixins import NDHDeleteMixin, NDHFormMixin
+
 from .models import Effet, Initiative
 
 
@@ -22,7 +24,7 @@ def round(request):
 
 class InitiativeMixin(object):
     model = Initiative
-    fields = ('slug', 'initiative')
+    fields = ('name', 'initiative')
     success_url = reverse_lazy('index')
 
 
@@ -30,21 +32,21 @@ class InitiativeListView(InitiativeMixin, ListView):
     pass
 
 
-class InitiativeCreateView(InitiativeMixin, CreateView):
+class InitiativeCreateView(NDHFormMixin, InitiativeMixin, CreateView):
     pass
 
 
-class InitiativeUpdateView(InitiativeMixin, UpdateView):
+class InitiativeUpdateView(NDHFormMixin, InitiativeMixin, UpdateView):
     pass
 
 
-class InitiativeDeleteView(InitiativeMixin, DeleteView):
+class InitiativeDeleteView(NDHDeleteMixin, InitiativeMixin, DeleteView):
     pass
 
 
 class EffetMixin(object):
     model = Effet
-    fields = ('slug', 'temps_restant')
+    fields = ('name', 'temps_restant')
     success_url = reverse_lazy('index')
 
 
@@ -52,13 +54,13 @@ class EffetListView(EffetMixin, ListView):
     pass
 
 
-class EffetCreateView(EffetMixin, CreateView):
+class EffetCreateView(NDHFormMixin, EffetMixin, CreateView):
     pass
 
 
-class EffetUpdateView(EffetMixin, UpdateView):
+class EffetUpdateView(NDHFormMixin, EffetMixin, UpdateView):
     pass
 
 
-class EffetDeleteView(EffetMixin, DeleteView):
+class EffetDeleteView(NDHDeleteMixin, EffetMixin, DeleteView):
     pass

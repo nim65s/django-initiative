@@ -1,13 +1,14 @@
-from django.db.models import CharField, F, IntegerField, Model
+from django.db import models
 from django.urls import reverse
 
+from ndh.models import NamedModel
 
-class Initiative(Model):
-    slug = CharField('Nom', max_length=100, primary_key=True)
-    initiative = IntegerField(default=0)
+
+class Initiative(NamedModel):
+    initiative = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return 'initiative: %2i pour %s' % (self.initiative, self.slug)
+        return 'initiative: %2i pour %s' % (self.initiative, self.name)
 
     class Meta:
         ordering = ('-initiative', 'slug')
@@ -16,12 +17,11 @@ class Initiative(Model):
         return reverse('index')
 
 
-class Effet(Model):
-    slug = CharField('Nom', max_length=100, primary_key=True)
-    temps_restant = IntegerField(default=0)
+class Effet(NamedModel):
+    temps_restant = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return '%3i rounds restant sur %s' % (self.temps_restant, self.slug)
+        return '%3i rounds restant sur %s' % (self.temps_restant, self.name)
 
     class Meta:
         ordering = ('-temps_restant', 'slug')
@@ -31,4 +31,4 @@ class Effet(Model):
 
     @staticmethod
     def round():
-        Effet.objects.filter(temps_restant__gt=0).update(temps_restant=F('temps_restant') - 1)
+        Effet.objects.filter(temps_restant__gt=0).update(temps_restant=models.F('temps_restant') - 1)
