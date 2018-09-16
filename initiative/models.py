@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
-from django.db.models import Model, CharField, IntegerField, F
+from django.db.models import CharField, F, IntegerField, Model
+from django.urls import reverse
 
 
 class Initiative(Model):

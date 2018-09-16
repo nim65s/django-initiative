@@ -1,14 +1,17 @@
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .models import Initiative, Effet
+from .models import Effet, Initiative
 
 
 def index(request):
-    return render(request, 'index.html', context={
-        'initiative_list': Initiative.objects.all(),
-        'effet_list': Effet.objects.all(),
+    return render(
+        request,
+        'index.html',
+        context={
+            'initiative_list': Initiative.objects.all(),
+            'effet_list': Effet.objects.all(),
         })
 
 
@@ -23,16 +26,20 @@ class InitiativeMixin(object):
     success_url = reverse_lazy('index')
 
 
-class InitiativeListView(InitiativeMixin, ListView): pass
+class InitiativeListView(InitiativeMixin, ListView):
+    pass
 
 
-class InitiativeCreateView(InitiativeMixin, CreateView): pass
+class InitiativeCreateView(InitiativeMixin, CreateView):
+    pass
 
 
-class InitiativeUpdateView(InitiativeMixin, UpdateView): pass
+class InitiativeUpdateView(InitiativeMixin, UpdateView):
+    pass
 
 
-class InitiativeDeleteView(InitiativeMixin, DeleteView): pass
+class InitiativeDeleteView(InitiativeMixin, DeleteView):
+    pass
 
 
 class EffetMixin(object):
@@ -41,13 +48,17 @@ class EffetMixin(object):
     success_url = reverse_lazy('index')
 
 
-class EffetListView(EffetMixin, ListView): pass
+class EffetListView(EffetMixin, ListView):
+    pass
 
 
-class EffetCreateView(EffetMixin, CreateView): pass
+class EffetCreateView(EffetMixin, CreateView):
+    pass
 
 
-class EffetUpdateView(EffetMixin, UpdateView): pass
+class EffetUpdateView(EffetMixin, UpdateView):
+    pass
 
 
-class EffetDeleteView(EffetMixin, DeleteView): pass
+class EffetDeleteView(EffetMixin, DeleteView):
+    pass
